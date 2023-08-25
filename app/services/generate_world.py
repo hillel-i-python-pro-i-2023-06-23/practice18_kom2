@@ -1,5 +1,21 @@
 
-def generate_word(word_len, use_simbols, max_word_variants):
+def generate_word_recursiv(alphabet, word_len, current_word="", output_strings=None):
+    if output_strings is None:
+        output_strings = []
+
+    if word_len == 0:
+        output_strings.append(current_word)
+        return output_strings
+
+    for letter in alphabet:
+        generate_word_recursiv(alphabet, word_len - 1, current_word + letter, output_strings)
+
+    return output_strings
+
+
+
+
+def generate_word_regularly(word_len, use_simbols, max_word_variants):
 
     output_strings = []
 
