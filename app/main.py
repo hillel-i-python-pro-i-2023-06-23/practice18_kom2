@@ -1,20 +1,13 @@
 from app.services.calk_max_variants import calk
-from app.services.generate_world import generate_word_recursive, generate_word_regularly
+from app.services.generate_world import generate_word_regularly
 from app.services.save import save_in_file
+from app.services.use_simbol import use_simbols
 import time
-import threading
 
-
-
+# import threading
 
 
 def main():
-    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    symbols = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '_', '+', '-', '=', '<', '>', '/', '?']
-
-    use_simbols = alphabet + numbers + symbols
-
     print("Пароль состоит из _ елементов?")
     word_len = int(input())
 
