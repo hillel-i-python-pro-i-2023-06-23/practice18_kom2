@@ -19,4 +19,3 @@ pyupgrade==3.9.0
 
 
 #optional
-Faker==19.1.0
