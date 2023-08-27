@@ -17,10 +17,10 @@ def generate_word_recursive(alphabet, word_len, current_word="", output_strings=
     return output_strings
 
 
-def generate_word_regularly(word_len, use_simbols, max_word_variants, last=0):
+def generate_word_regularly(word_len, use_simbols, start, end):
     output_strings = []
 
-    for i in range(last, max_word_variants):
+    for i in range(start, end):
         indices = []
         remaining = i
         for _ in range(word_len):
@@ -28,5 +28,7 @@ def generate_word_regularly(word_len, use_simbols, max_word_variants, last=0):
             remaining //= len(use_simbols)
         word = "".join([use_simbols[idx] for idx in reversed(indices)])
         output_strings.append(word)
+
+        # output_strings = []
 
     return output_strings
