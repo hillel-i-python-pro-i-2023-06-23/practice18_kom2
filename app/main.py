@@ -1,10 +1,14 @@
+import sys
 from app.services.calk_max_variants import calk
-from app.services.generate_world import generate_word_regularly
+from app.services.generate_world import generate_word_regularly, process_worker
 from app.services.save import save_in_file
 from app.services.use_simbol import use_simbols
 import multiprocessing
 import time
 import os
+from pathlib import Path
+
+OUTPUT_PATH = Path.cwd().joinpath("output")
 
 def main():
     print("Пароль состоит из _ елементов?")
@@ -14,6 +18,7 @@ def main():
 
     start_time_for_regularly = time.time()
 
+    lock = multiprocessing.Lock()
     num_cores = os.cpu_count()//2
     process_list = []
     start = 0
@@ -23,7 +28,9 @@ def main():
         if process == num_cores-1:
             end = word_variants
 
-        future = multiprocessing.Process(target=generate_word_regularly, args=(word_len, use_simbols, start, end), name=f"process{process}")
+        word_generator = generate_word_regularly(word_len, use_simbols, start, end)
+        future = multiprocessing.Process(target=process_worker, args=(word_generator, OUTPUT_PATH / f"output{process}.txt", lock),
+                                         name=f"process{process}")
         process_list.append(future)
         future.start()
         start = end
