@@ -27,8 +27,9 @@ def generate_word_regularly(word_len, use_simbols, start, end):
             indices.append(remaining % len(use_simbols))
             remaining //= len(use_simbols)
         word = "".join([use_simbols[idx] for idx in reversed(indices)])
+        # yield word
         output_strings.append(word)
 
-        # output_strings = []
+        output_strings = []
 
     return output_strings
