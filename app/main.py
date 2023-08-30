@@ -10,6 +10,7 @@ from pathlib import Path
 
 OUTPUT_PATH = Path.cwd().joinpath("output")
 
+
 def main():
     print("Пароль состоит из _ елементов?")
     word_len = int(input())
@@ -19,7 +20,7 @@ def main():
     start_time_for_regularly = time.time()
 
     lock = multiprocessing.Lock()
-    num_cores = os.cpu_count()//2
+    num_cores = os.cpu_count() // 2
     process_list = []
     start = 0
     end = int(word_variants / num_cores)
@@ -27,18 +28,18 @@ def main():
     print(num_word_in_one_file)
     print(get_available_memory())
     for process in range(num_cores):
-        if process == num_cores-1:
+        if process == num_cores - 1:
             end = word_variants
 
-
-        future = multiprocessing.Process(target=process_worker,
-                                         args=(word_len, use_simbols, process, start, end, num_word_in_one_file, OUTPUT_PATH, lock),
-                                         name=f"process{process}")
+        future = multiprocessing.Process(
+            target=process_worker,
+            args=(word_len, use_simbols, process, start, end, num_word_in_one_file, OUTPUT_PATH, lock),
+            name=f"process{process}",
+        )
         process_list.append(future)
         future.start()
         start = end
         end += int(word_variants / num_cores)
-
 
     for i in process_list:
         i.join()

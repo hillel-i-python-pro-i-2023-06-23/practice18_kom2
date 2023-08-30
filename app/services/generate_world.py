@@ -29,7 +29,6 @@ def generate_word_regularly(word_len, use_simbols, start, end):
 
 
 def process_worker(word_len, use_simbols, process_id, start, end, num_word_in_one_file, output_path, lock):
-
     for sub_range_start in range(start, end, num_word_in_one_file):
         sub_range_end = min(sub_range_start + num_word_in_one_file, end)
         word_generator = generate_word_regularly(word_len, use_simbols, sub_range_start, sub_range_end)
