@@ -8,12 +8,13 @@ import os
 from pathlib import Path
 
 
-OUTPUT_PATH = Path.cwd().joinpath("output")
+OUTPUT_PATH = Path.cwd().joinpath("files_output")
 
 
 def main():
     print("Пароль состоит из _ елементов?")
-    word_len = int(input())
+    # word_len = int(input())
+    word_len = 4
     word_variants = calk(len(use_simbols), word_len)
     print(word_variants)
 
@@ -27,6 +28,7 @@ def main():
     num_word_in_one_file = calculate_max_words(num_cores, word_len)
     print(num_word_in_one_file)
     print(get_available_memory())
+    print(num_cores)
     for process in range(num_cores):
         if process == num_cores - 1:
             end = word_variants

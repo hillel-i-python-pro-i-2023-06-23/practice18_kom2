@@ -19,3 +19,4 @@ pyupgrade==3.9.0
 
 
 #optional
+psutil==5.9.5

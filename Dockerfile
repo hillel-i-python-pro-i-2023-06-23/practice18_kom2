@@ -20,6 +20,7 @@ RUN pip install --upgrade pip && \
 COPY --chown=${USER} ./run.py run.py
 COPY --chown=${USER} ./app app
 
+
 USER ${USER}
 
 ENTRYPOINT ["python", "run.py"]
