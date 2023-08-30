@@ -14,14 +14,14 @@ OUTPUT_PATH = Path.cwd().joinpath("files_output")
 def main():
     print("Пароль состоит из _ елементов?")
     # word_len = int(input())
-    word_len = 4
+    word_len = 5
     word_variants = calk(len(use_simbols), word_len)
     print(word_variants)
 
     start_time_for_regularly = time.time()
 
     lock = multiprocessing.Lock()
-    num_cores = os.cpu_count() // 2
+    num_cores = os.cpu_count()
     process_list = []
     start = 0
     end = int(word_variants / num_cores)

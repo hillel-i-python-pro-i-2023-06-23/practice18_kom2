@@ -37,6 +37,10 @@ def process_worker(word_len, use_simbols, process_id, start, end, num_word_in_on
         filename = output_path / f"output_process{process_id}_range{sub_range_start}-{sub_range_end}.txt"
 
         with open(filename, "a") as f:
-            for word in words:
-                with lock:
-                    f.write(f"'{word}', ")
+            with lock:
+                f.write(f"'{words}', ")
+
+        # with open(filename, "a") as f:
+        #     for word in words:
+        #         with lock:
+        #             f.write(f"'{word}', ")

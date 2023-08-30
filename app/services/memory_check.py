@@ -2,7 +2,7 @@ import psutil
 
 
 def get_available_memory():
-    mem = psutil.virtual_memory().available / (1024 * 1024) * 0.1
+    mem = psutil.virtual_memory().available / (1024 * 1024) * 0.05
     return mem
 
 
