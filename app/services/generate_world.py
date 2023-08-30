@@ -28,10 +28,16 @@ def generate_word_regularly(word_len, use_simbols, start, end):
         yield word
 
 
-def process_worker(word_generator, filename, lock):
-    words = list(word_generator)
+def process_worker(word_len, use_simbols, process_id, start, end, num_word_in_one_file, output_path, lock):
 
-    with open(filename, "a") as f:
-        for word in words:
-            with lock:
-                f.write(f"'{word}', ")
+    for sub_range_start in range(start, end, num_word_in_one_file):
+        sub_range_end = min(sub_range_start + num_word_in_one_file, end)
+        word_generator = generate_word_regularly(word_len, use_simbols, sub_range_start, sub_range_end)
+        words = list(word_generator)
+
+        filename = output_path / f"output_process{process_id}_range{sub_range_start}-{sub_range_end}.txt"
+
+        with open(filename, "a") as f:
+            for word in words:
+                with lock:
+                    f.write(f"'{word}', ")
